@@ -1,0 +1,67 @@
+This challenge will let you learn about bitwise operators in C.
+
+Inside the CPU, mathematical operations like addition, subtraction, multiplication and division are done in bit-level. To perform bit-level operations in C programming, bitwise operators are used which are explained below.
+
+Bitwise AND operator & The output of bitwise AND is 1 if the corresponding bits of two operands is 1. If either bit of an operand is 0, the result of corresponding bit is evaluated to 0. It is denoted by &.
+
+Bitwise OR operator | The output of bitwise OR is 1 if at least one corresponding bit of two operands is 1. It is denoted by |.
+
+Bitwise XOR (exclusive OR) operator ^ The result of bitwise XOR operator is 1 if the corresponding bits of two operands are opposite. It is denoted by .
+
+For example, for integers 3 and 5,
+
+3 = 00000011 (In Binary)
+5 = 00000101 (In Binary)
+
+AND operation        OR operation        XOR operation
+  00000011             00000011            00000011
+& 00000101           | 00000101          ^ 00000101
+  ________             ________            ________
+  00000001  = 1        00000111  = 7       00000110  = 6
+Task
+Given set S={1,2,3,...,n} , find:
+the maximum value of a&b  which is less than a given integer k , where a and b (where a<b ) are two integers from set S.
+
+the maximum value of a|b which is less than a given integer k, where a and b (where a<b) are two integers from set S.
+
+the maximum value of a^b which is less than a given integer k, where a and b (where a<b) are two integers from set S.
+Solution is as follows:
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+//Complete the following function.
+
+
+void calculate_the_maximum(int n, int k) {
+    int a,b,and=0,or=0,xor=0;
+  //for the bitwise & operator.
+  for(a=1;a<=n;a++){
+      for (b=a+1; b<=n; b++) {
+          if(a<b){
+              if((a&b) < k){ if( (a&b) > and){
+                  and=a&b;
+              //printf("%d",and);
+              }}
+              if((a|b) < k ){if( (a|b) > or){
+                  or=a|b;
+                  //printf("%d",or);
+              }}
+              if((a^b) < k){if((a^b) > xor){
+                  xor=a^b;
+                  //printf("%d",xor);
+              }}
+          }
+      }
+  }
+  printf("%d\n%d\n%d",and,or,xor);
+}
+
+int main() {
+    int n, k;
+  
+    scanf("%d %d", &n, &k);
+    calculate_the_maximum(n, k);
+ 
+    return 0;
+}
